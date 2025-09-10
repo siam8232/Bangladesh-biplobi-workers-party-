@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SolaimanLipi', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* হেডার স্টাইল */
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .party-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* নেভিগেশন */
+        nav {
+            background-color: #b71c1c;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* কন্টেন্ট এরিয়া */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        /* পোস্ট স্টাইল */
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+        }
+        
+        .post-caption {
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d32f2f;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .post-details {
+            padding: 15px;
+            line-height: 1.6;
+        }
+        
+        /* ফুটার */
+        footer {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        
+        /* লোডিং স্টেট */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #d32f2f;
+        }
+        
+        /* রেসপনসিভ ডিজাইন */
+        @media (max-width: 768px) {
+            .party-name {
+                font-size: 20px;
+            }
+            
+            .tagline {
+                font-size: 16px;
+            }
+            
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://i.ibb.co.com/8gZq7dsb/20250910-222337.png" alt="বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি লোগো" class="logo">
+            <h1 class="party-name">বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি</h1>
+        </div>
+        <p class="tagline">শোষণমুক্ত সমাজ গড়ার অঙ্গীকার</p>
+    </header>
+    
+    
+    
+    <div class="container">
+        <h2 style="text-align: center; margin: 20px 0; color: #d32f2f;">সাম্প্রতিক পোস্টসমূহ</h2>
+        <div id="posts-container">
+            <div class="loading">পোস্ট লোড হচ্ছে...</div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি © ২০২৩</p>
+        <p>শোষিত মানুষের মুক্তির জন্য সংগ্রাম</p>
+    </footer>
+
+    <script>
+        // Firebase কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyClXHMGV2LvglhCqNZUGkzm7bDGrOQUyiU",
+            authDomain: "biplobi-workers-party.firebaseapp.com",
+            databaseURL: "https://biplobi-workers-party-default-rtdb.firebaseio.com",
+            projectId: "biplobi-workers-party",
+            storageBucket: "biplobi-workers-party.firebasestorage.app",
+            messagingSenderId: "465361252687",
+            appId: "1:465361252687:android:794cb50d8382c0ab62153a"
+        };
+        
+        // Firebase ইনিশিয়ালাইজেশন
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // পোস্ট লোড করার ফাংশন
+        function loadPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '<div class="loading">পোস্ট লোড হচ্ছে...</div>';
+            
+            const postsRef = database.ref('posts');
+            
+            postsRef.on('value', (snapshot) => {
+                const postsData = snapshot.val();
+                postsContainer.innerHTML = '';
+                
+                if (postsData) {
+                    // পোস্টগুলোকে timestamp অনুসারে সাজানো
+                    const sortedPosts = Object.entries(postsData).sort((a, b) => {
+                        return b[1].timestamp - a[1].timestamp;
+                    });
+                    
+                    sortedPosts.forEach(([postId, post]) => {
+                        const postElement = document.createElement('div');
+                        postElement.className = 'post';
+                        postElement.innerHTML = `
+                            <img src="${post.imageUrl}" alt="${post.caption}" class="post-image" onerror="this.src='https://via.placeholder.com/800x400/d32f2f/ffffff?text=ছবি+লোড+ব্যর্থ'">
+                            <div class="post-caption">${post.caption}</div>
+                            <div class="post-details">${post.details}</div>
+                        `;
+                        postsContainer.appendChild(postElement);
+                    });
+                } else {
+                    postsContainer.innerHTML = '<div class="loading">কোন পোস্ট পাওয়া যায়নি</div>';
+                }
+            }, (error) => {
+                postsContainer.innerHTML = '<div class="loading">পোস্ট লোড করতে সমস্যা হয়েছে</div>';
+                console.error(error);
+            });
+        }
+        
+        // পেজ লোড হলে পোস্ট লোড করুন
+        document.addEventListener('DOMContentLoaded', loadPosts);
+    </script>
+</body>
+</html>
