@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         * {
             margin: 0;
@@ -45,6 +48,14 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        /* ভেরিফাই আইকনের জন্য যোগ করা স্টাইল */
+        .party-name .fa-circle-check {
+            color: #1DA1F2; /* ভেরিফাইড ব্লু রঙ */
+            font-size: 0.9em; /* হেডিং এর থেকে সামান্য ছোট */
+            vertical-align: middle; /* টেক্সটের সাথে অ্যালাইন করার জন্য */
+            margin-left: 5px; /* নামের থেকে একটু ডানে সরাতে */
+        }
         
         .tagline {
             font-size: 18px;
@@ -72,7 +83,7 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
         
-        /* কন্টেন্ট এরিয়া */
+        /* কন্টেন্ট এরিয়া */
         .container {
             max-width: 1000px;
             margin: 20px auto;
@@ -132,6 +143,11 @@
             .party-name {
                 font-size: 20px;
             }
+
+            /* মোবাইলেও আইকন সাইজ অ্যাডজাস্ট করা */
+            .party-name .fa-circle-check {
+                font-size: 0.9em;
+            }
             
             .tagline {
                 font-size: 16px;
@@ -144,7 +160,6 @@
         }
     </style>
     
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
@@ -152,7 +167,7 @@
     <header>
         <div class="logo-container">
             <img src="https://i.ibb.co.com/8gZq7dsb/20250910-222337.png" alt="বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি লোগো" class="logo">
-            <h1 class="party-name">বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি</h1>
+            <h1 class="party-name">বাংলাদেশের বিপ্লবী ওয়ার্কার্স পার্টি <i class="fa-solid fa-circle-check"></i></h1>
         </div>
         <p class="tagline">শোষণমুক্ত সমাজ গড়ার অঙ্গীকার</p>
     </header>
